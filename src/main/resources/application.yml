@@ -1,0 +1,54 @@
+server:
+  # TODO 端口
+  port: 8686
+  connection-timeout: 20000ms
+  servlet:
+    #TODO 项目根路径
+    context-path: /demo
+
+
+
+spring:
+  # 环境 dev|test|prod
+  profiles:
+    active: @profiles.active@
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+
+  application:
+    name: demo
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
+
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: demo.entity
+  global-config:
+    db-config:
+      id-type: id_worker
+      table-underline: true
+      db-type: mysql
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+    refresh: true
+  configuration:
+    #  查询之后下划线自动转驼峰
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+
+#分页插件
+pagehelper:
+  reasonable: false
+  helperDialect: mysql
+  params: count=countSql
+  page-size-zero: true
+
+
+
